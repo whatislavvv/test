@@ -6,10 +6,8 @@ def main_page(page: ft.Page):
     page.theme_mode = ft.ThemeMode.DARK
     hello_text = ft.Text(value='Hello world')
     greeting_history = []
-    # Задание 3
-    time_dictionary = []  
-    # Задание 2
-    favorites = []       
+    favorites = []     # для задания 2  
+    time_dictionary = []   # для задания 3
     history_text = ft.Text("История приветствий:")
     favorites_text = ft.Text("Любимые имена: ") 
 
@@ -22,10 +20,9 @@ def main_page(page: ft.Page):
             hello_text.color = None
             name_input.value = None
             greeting_history.append(name) 
-            # Задание 3
-            time_dictionary.append({"text": hello_text.value, "hour": now.hour})
+            time_dictionary.append({"text": hello_text.value, "hour": now.hour}) #задание 3
             history_text.value = f'ИСТОРИЯ ПРИВЕСТВИЙ \n' + ' \n - '.join(greeting_history)
-            
+
         else:
             hello_text.value = 'ОШИБКА: Введите имя'
             hello_text.color = ft.Colors.RED
@@ -46,7 +43,7 @@ def main_page(page: ft.Page):
         favorites_text.value = "Любимые имена: "
         page.update()
 
-    # Задание 2
+    #  функция для добавления любимых имён
     def add_to_favorites(_):
         if greeting_history:
             last_name = greeting_history[-1]
@@ -55,7 +52,7 @@ def main_page(page: ft.Page):
                 favorites_text.value = 'ЛЮБИМЫЕ ИМЕНА \n' + ' \n - '.join(favorites)
                 page.update()
 
-    # Задание 3
+    # функции с фильтрацией до 12:00(утро) и после 12:00(решил что будет вечер)
     def filter_morning(_):
         morning = [item["text"] for item in time_dictionary if item["hour"] < 12]
         history_text.value = "УТРЕННИЕ ПРИВЕТСТВИЯ:\n" + "\n".join(morning)
@@ -64,6 +61,7 @@ def main_page(page: ft.Page):
         evening = [item["text"] for item in time_dictionary if item["hour"] >= 12]
         history_text.value = "ВЕЧЕРНИЕ ПРИВЕТСТВИЯ:\n" + "\n".join(evening)
         page.update()
+
     def show_all_history(_):
         history_text.value = f'ИСТОРИЯ ПРИВЕСТВИЙ \n' + ' \n - '.join(greeting_history)
         page.update()
