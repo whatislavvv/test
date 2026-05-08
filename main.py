@@ -52,7 +52,7 @@ def main_page(page: ft.Page):
                 favorites_text.value = 'ЛЮБИМЫЕ ИМЕНА \n' + ' \n - '.join(favorites)
                 page.update()
 
-    # функции с фильтрацией до 12:00(утро) и после 12:00(решил что будет вечер)
+    # функции с фильтрацией до 12:00(утро) и после 12:00
     def filter_morning(_):
         morning = [item["text"] for item in time_dictionary if item["hour"] < 12]
         history_text.value = "УТРЕННИЕ ПРИВЕТСТВИЯ:\n" + "\n".join(morning)
